@@ -16,3 +16,10 @@ That being said, this will be an ongoing WIP, only to be finished when I become 
 * `thresh`: Condition for selling.  The bot will only sell Ethereum if you will obtain more than `thresh` times as much USD as you had last time.  Express as a number near 1 (ie, `1.005` is 0.5%).
 * `eps`: The difference in value between long and short moving average to pay attention to.  Express in dollars (ie, `0.05` is 5 cents).
 * `start_usd`, `start_eth`: Starting amounts of USD and ETH to work with.
+
+# TODOs
+
+* Integrate Poloniex API.
+* Change printing mechanisms to allow any choice of currency pair.
+* ????
+* Profit!
