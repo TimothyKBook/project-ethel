@@ -30,7 +30,7 @@ class Wallet:
         buy_str = "Buying ETH.  Wallet contains %1.6f ETH (%5.2f USD)" % (self.n_eth, self.n_usd)
         summ_str = "Wallet is now worth %5.2f USD" % (self.n_eth * price + self.n_usd)
         price_str = "Price at buying: %5.2f USD" % price
-        width = max(len(buy_str), len(summ_str), price_str)
+        width = max(len(buy_str), len(summ_str), len(price_str))
         buy_str = buy_str.ljust(width, ' ')
         summ_str = summ_str.ljust(width, ' ')
         price_str = price_str.ljust(width, ' ')

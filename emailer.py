@@ -12,17 +12,17 @@ class Emailer:
         self.conn.login(address, password)
 
     def buyEmail(self, w, p):
-        subj_line = "Subject: Bought ETH\n"
+        subj_line = "Subject: Ethel just bought ETH\n"
         line1 = "ETH price at purchase: $%5.2f" % p.current_price
-        line2 = "Wallet now contains %1.6f ETH (worth $%5.2)" \
+        line2 = "Wallet now contains %1.6f ETH (worth $%5.2f)" \
                 % (w.n_eth, w.n_eth * p.current_price)
         body = subj_line + line1 + line2
-        self.conn.sendmail(address, address, body)
+        self.conn.sendmail(self.address, self.address, body)
 
     def sellEmail(self, w, p):
-        subj_line = "Subject: Sold ETH\n"
+        subj_line = "Subject: Ethel just sold ETH\n"
         line1 = "ETH price at sell: $%5.2f" % p.current_price
-        line2 = "Wallet now contains $%5.2 (worth %1.6f ETH)" \
+        line2 = "Wallet now contains $%5.2f (worth %1.6f ETH)" \
                 % (w.n_usd, w.n_usd / p.current_price)
         body = subj_line + line1 + line2
-        self.conn.sendmail(address, address, body)
+        self.conn.sendmail(self.address, self.address, body)
