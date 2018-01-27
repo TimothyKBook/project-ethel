@@ -5,7 +5,11 @@ import time, datetime
 
 from wallet import Wallet
 from prices import Prices
+from emailer import Emailer
 from utilities import shouldBuy, shouldSell, checkin
+
+# .gitignored file that contains the two strings used in line 26
+import secrets
 
 conn = Poloniex()
 pair = "USDT_ETH"
@@ -19,6 +23,7 @@ start_eth = 0
 
 w = Wallet(start_usd, start_eth, thresh)
 prices = Prices(conn, pair, short_len, long_len)
+em = Emailer(secrets.myaddress, secrets.mypassword)
 
 while True:
     if len(prices.prices) < prices.long_len:
@@ -35,9 +40,11 @@ while True:
 
     if shouldBuy(w, prices, eps):
         w.buyCoin(prices.current_price)
+        em.buyEmail(w, prices)
 
     if shouldSell(w, prices, eps):
         w.sellCoin(prices.current_price)
+        em.sellEmail(w, prices)
 
     time.sleep(SLEEP_SEC)
 

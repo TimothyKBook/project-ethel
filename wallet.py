@@ -29,10 +29,14 @@ class Wallet:
         ending = '\x1b[0m'
         buy_str = "Buying ETH.  Wallet contains %1.6f ETH (%5.2f USD)" % (self.n_eth, self.n_usd)
         summ_str = "Wallet is now worth %5.2f USD" % (self.n_eth * price + self.n_usd)
-        width = max(len(buy_str), len(summ_str))
+        price_str = "Price at buying: %5.2f USD" % price
+        width = max(len(buy_str), len(summ_str), price_str)
         buy_str = buy_str.ljust(width, ' ')
         summ_str = summ_str.ljust(width, ' ')
-        print(coloring + buy_str + ending + '\n' + coloring + summ_str + ending + '\n')
+        price_str = price_str.ljust(width, ' ')
+        print(coloring + buy_str + ending + '\n' \
+                + coloring + summ_str + ending + '\n' \
+                + coloring + price_str + ending + '\n')
 
     def sellMessage(self, price):
         # This is a green background with dark text
@@ -40,10 +44,14 @@ class Wallet:
         ending = '\x1b[0m'
         sell_str = "Selling ETH. Wallet contains %5.2f USD (%1.6f ETH)" % (self.n_usd, self.n_eth)
         summ_str = "Wallet is now worth %5.2f USD" % (self.n_eth * price + self.n_usd)
-        width = max(len(sell_str), len(summ_str))
+        price_str = "Price at selling: %5.2f USD" % price
+        width = max(len(sell_str), len(summ_str), len(price_str))
         sell_str = sell_str.ljust(width, ' ')
         summ_str = summ_str.ljust(width, ' ')
-        print(coloring + sell_str + ending + '\n' + coloring + summ_str + ending + '\n')
+        price_str = price_str.ljust(width, ' ')
+        print(coloring + sell_str + ending + '\n' \
+                + coloring + summ_str + ending + '\n' \
+                + coloring + price_str + ending + '\n')
 
     # NOTE: This is currently unused in current implementation of code, since each transaction
     # dumps all currency into the other.
