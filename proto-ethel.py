@@ -9,15 +9,15 @@ from utilities import shouldBuy, shouldSell, checkin
 
 conn = Poloniex()
 pair = "USDT_ETH"
-SLEEP_SEC = 1
-short_len = 2
-long_len  = 4
+SLEEP_SEC = 30
+short_len = 5
+long_len  = 20
 thresh    = 1.005
 eps       = 0.05
 start_usd = 1000
 start_eth = 0
 
-w = Wallet(start_usd, start_eth, thresh = thresh)
+w = Wallet(start_usd, start_eth, thresh)
 prices = Prices(conn, pair, short_len, long_len)
 
 while True:
@@ -30,7 +30,7 @@ while True:
     prices.addCurrentPrice()
     prices.updateMA()
 
-    if len(prices.prices) % 5 == 0:
+    if len(prices.prices) % 20 == 0:
         checkin(w, prices)
 
     if shouldBuy(w, prices, eps):

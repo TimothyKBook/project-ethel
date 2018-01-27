@@ -1,13 +1,13 @@
 def shouldBuy(w, p, e):
     cond1 = p.ma_short > p.ma_long + e
     cond2 = w.phase != 'buy'
-    cond3 = w.n_usd / p.current_price > w.prev_eth * w.thresh
+    cond3 = w.n_usd / p.current_price > w.prev_eth
     return cond1 & cond2 & cond3
 
 def shouldSell(w, p, e):
     cond1 = p.ma_short > p.ma_long - e
     cond2 = w.phase != 'sell'
-    cond3 = w.n_eth * p.current_price > w.prev_usd
+    cond3 = w.n_eth * p.current_price > w.prev_usd * w.thresh
     return cond1 & cond2 & cond3
 
 def checkin(w, p):
