@@ -1,5 +1,7 @@
 class Wallet:
     def __init__(self, start_usd, start_eth, thresh):
+        self.start_usd = start_usd
+        self.start_eth = start_eth
         self.n_usd = self.prev_usd = start_usd
         self.n_eth = self.prev_eth = start_eth
         self.thresh = thresh
@@ -51,38 +53,3 @@ class Wallet:
         ending = '\x1b[0m'
         error_str = "ERROR: You attempted to %s but had insufficient funds!" % txtype
         print(coloring + error_str + ending)
-
-    def checkin(self, prices):
-
-        def enyellow(s):
-            yellow = '\x1b[5;30;43m'
-            ending = '\x1b[0m'
-            return yellow + s + ending
-
-        def engreen(s):
-            green = '\x1b[6;30;42m'
-            ending = '\x1b[0m'
-            return green + s + ending
-
-        current_value = self.n_eth * prices.current_price + self.n_usd
-
-        print("CHECKIN %i.  WALLET CONTAINS:" & len(prices.prices))
-        print(enyellow("%1.6f ETH" % self.n_eth) + " and " + engreen("%5.2f USD" % self.n_usd))
-        print("CURRENT PRICE:".ljust(21, ' ') + ("%5.2f USD" % prices.current_price))
-        print("CURRENT SHORT MA:".ljust(21, ' ') + ("%5.2f USD" % prices.short_ma))
-        print("CURRENT LONG MA:".ljust(21, ' ') + ("%5.2f USD" % prices.long_ma))
-        print("CURRENT WALLET VALUE:".ljust(21, ' ') + ("%5.2f USD" % current_value))
-        print('')
-
-    def shouldBuy(self, prices, e):
-        cond1 = prices.ma_short > prices.ma_long + e
-        cond2 = self.phase != 'buy'
-        cond3 = self.n_usd / prices.current_price > self.prev_eth * self.thresh
-        return cond1 & cond2 & cond3
-
-    def shouldSell(self, prices, e):
-        cond1 = prices.ma_short > prices.ma_long - e
-        cond2 = self.phase != 'sell'
-        cond3 = self.n_eth * prices.current_price > self.prev_usd
-        return cond1 & cond2 & cond3
-

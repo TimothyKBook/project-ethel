@@ -23,6 +23,7 @@ def checkin(w, p):
         return green + s + ending
 
     current_value = w.n_eth * p.current_price + w.n_usd
+    initial_value = (w.start_usd / p.initial_price + w.start_eth) * p.current_price
 
     print("CHECKIN %i.  WALLET CONTAINS:" % len(p.prices))
     print(enyellow("%1.6f ETH" % w.n_eth) + " and " + engreen("%5.2f USD" % w.n_usd))
@@ -30,4 +31,5 @@ def checkin(w, p):
     print("CURRENT SHORT MA:".ljust(21, ' ') + ("%5.2f USD" % p.ma_short))
     print("CURRENT LONG MA:".ljust(21, ' ') + ("%5.2f USD" % p.ma_long))
     print("CURRENT WALLET VALUE:".ljust(21, ' ') + ("%5.2f USD" % current_value))
+    print("IF YOU JUST BAH:".ljust(21, ' ') + ("%5.2f USD" % initial_value))
     print('')
