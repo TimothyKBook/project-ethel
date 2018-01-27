@@ -13,6 +13,6 @@ That being said, this will be an ongoing WIP, only to be finished when I become 
 * `pair`: The currency pair to trade.  Right now I'm only playing with USD vs Ethereum, but any pair is possible.  I will make this customizable eventually.
 * `SLEEP_SEC`: The number of seconds between API calls for the current price.
 * `short_len`, `long_len`: The lengths of the two moving averages to use.
-* `thresh`: Condition for buying.  The bot will only purchase Ethereum if you will obtain more than `thresh` times as much as you had last time.  Express as a number near 1 (ie, `1.005` is 0.5%).  Admittedly, this should probably be either a sell condition or both a buy/sell condition.  The intelligent investor would no better than me.
+* `thresh`: Condition for buying.  The bot will only purchase Ethereum if you will obtain more than `thresh` times as much as you had last time.  Express as a number near 1 (ie, `1.005` is 0.5%).  Admittedly, this should probably be either a sell condition or both a buy/sell condition.  The intelligent investor would know better than me.
 * `eps`: The difference in value between long and short moving average to pay attention to.  Express in dollars (ie, `0.05` is 5 cents).
 * `start_usd`, `start_eth`: Starting amounts of USD and ETH to work with.
