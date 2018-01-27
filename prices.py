@@ -11,6 +11,7 @@ class Prices:
         self.ma_long = None
         self.short_len = short_len
         self.long_len = long_len
+        self.initial_price = float(self.conn.returnTicker()[self.pair]['last'])
 
     def addCurrentPrice(self):
         self.current_price = float(self.conn.returnTicker()[self.pair]['last'])
