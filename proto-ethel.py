@@ -20,10 +20,11 @@ thresh    = 1.005
 eps       = 0.05
 start_usd = 1000
 start_eth = 0
+use_email = False
 
 w = Wallet(start_usd, start_eth, thresh)
 prices = Prices(conn, pair, short_len, long_len)
-em = Emailer(secrets.myaddress, secrets.mypassword)
+if use_email: em = Emailer(secrets.myaddress, secrets.mypassword)
 
 while True:
     if len(prices.prices) < prices.long_len:
@@ -40,11 +41,11 @@ while True:
 
     if shouldBuy(w, prices, eps):
         w.buyCoin(prices.current_price)
-        em.buyEmail(w, prices)
+        if use_email: em.buyEmail(w, prices)
 
     if shouldSell(w, prices, eps):
         w.sellCoin(prices.current_price)
-        em.sellEmail(w, prices)
+        if use_email: em.sellEmail(w, prices)
 
     time.sleep(SLEEP_SEC)
 
