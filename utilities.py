@@ -1,7 +1,7 @@
 def shouldBuy(w, p, e):
     cond1 = p.ma_short > p.ma_long + e
     cond2 = w.phase != 'buy'
-    cond3 = w.n_usd / p.current_price > w.prev_eth
+    cond3 = w.n_usd / p.current_price > w.prev_eth * w.thresh
     return cond1 & cond2 & cond3
 
 def shouldSell(w, p, e):

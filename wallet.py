@@ -8,20 +8,26 @@ class Wallet:
         self.phase = ''
 
     # TODO: Update this with the Poloniex API
-    def buyCoin(self, price):
+    def buyCoin(self, p):
         self.phase = 'buy'
         self.prev_usd = self.n_usd
-        self.n_eth += self.n_usd / price
-        self.n_usd = 0
-        self.buyMessage(price)
+
+        buy_amt = (self.n_usd / p.current_price) * 0.95
+        p.conn.createMarketBuyOrder(p.pair, buy_amt)
+        self.n_eth = p.conn.fetchBalance()['free'][p.pair[:3]]
+        self.n_usd = p.conn.fetchBalance()['free'][p.pair[-3:]]
+        self.buyMessage(p.current_price)
 
     # TODO: Update this with the Poloniex API
-    def sellCoin(self, price):
+    def sellCoin(self, p):
         self.phase = 'sell'
         self.prev_eth = self.n_eth
-        self.n_usd += self.n_eth * price
-        self.n_eth = 0
-        self.sellMessage(price)
+
+        sell_amt = self.n_eth * 0.95
+        p.conn.createMarketSellOrder(p.pair, sell_amt)
+        self.n_eth = p.conn.fetchBalance()['free'][p.pair[:3]]
+        self.n_usd = p.conn.fetchBalance()['free'][p.pair[-3:]]
+        self.sellMessage(p.current_price)
 
     def buyMessage(self, price):
         # This is a yellow background with dark text
