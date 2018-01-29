@@ -5,7 +5,7 @@ def shouldBuy(w, p, e):
     return cond1 & cond2 & cond3
 
 def shouldSell(w, p, e):
-    cond1 = p.ma_short > p.ma_long - e
+    cond1 = p.ma_short < p.ma_long - e
     cond2 = w.phase != 'sell'
     cond3 = w.n_eth * p.current_price > w.prev_usd * w.thresh
     return cond1 & cond2 & cond3
@@ -27,9 +27,9 @@ def checkin(w, p):
 
     print("CHECKIN %i.  WALLET CONTAINS:" % len(p.prices))
     print(enyellow("%1.6f ETH" % w.n_eth) + " and " + engreen("%5.2f USD" % w.n_usd))
-    print("CURRENT PRICE:".ljust(21, ' ') + ("%5.2f USD" % p.current_price))
-    print("CURRENT SHORT MA:".ljust(21, ' ') + ("%5.2f USD" % p.ma_short))
-    print("CURRENT LONG MA:".ljust(21, ' ') + ("%5.2f USD" % p.ma_long))
-    print("CURRENT WALLET VALUE:".ljust(21, ' ') + ("%5.2f USD" % current_value))
-    print("IF YOU JUST BAH:".ljust(21, ' ') + ("%5.2f USD" % initial_value))
+    print("CURRENT PRICE:".ljust(22, ' ') + ("%5.2f USD" % p.current_price))
+    print("CURRENT SHORT MA:".ljust(22, ' ') + ("%5.2f USD" % p.ma_short))
+    print("CURRENT LONG MA:".ljust(22, ' ') + ("%5.2f USD" % p.ma_long))
+    print("CURRENT WALLET VALUE:".ljust(22, ' ') + ("%5.2f USD" % current_value))
+    print("IF YOU JUST BAH:".ljust(22, ' ') + ("%5.2f USD" % initial_value))
     print('')
