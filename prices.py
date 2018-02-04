@@ -1,4 +1,3 @@
-# TODO: Why do I need this here?
 import numpy as np
 
 class Prices:
@@ -7,6 +6,7 @@ class Prices:
         self.conn = conn
         self.pair = pair
         self.current_price = None
+        self.prev_price = None
         self.ma_short = None
         self.ma_long = None
         self.short_len = short_len
@@ -14,6 +14,7 @@ class Prices:
         self.initial_price = float(self.conn.fetchTicker(self.pair)['last'])
 
     def addCurrentPrice(self):
+        self.prev_price = self.current_price
         self.current_price = float(self.conn.fetchTicker(self.pair)['last'])
         self.prices.append(self.current_price)
 

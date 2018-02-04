@@ -15,8 +15,8 @@ pair = "ETH/USD"
 SLEEP_SEC = 30
 short_len = 5
 long_len  = 30
-thresh    = 1.005
-eps       = 0.05
+thresh    = 1.0025
+eps       = 4
 use_email = False
 
 conn = ccxt.kraken({

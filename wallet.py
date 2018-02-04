@@ -5,9 +5,8 @@ class Wallet:
         self.n_usd = self.prev_usd = start_usd
         self.n_eth = self.prev_eth = start_eth
         self.thresh = thresh
-        self.phase = ''
+        self.phase = 'sell'
 
-    # TODO: Update this with the Poloniex API
     def buyCoin(self, p):
         self.phase = 'buy'
         self.prev_usd = self.n_usd
@@ -18,7 +17,6 @@ class Wallet:
         self.n_usd = p.conn.fetchBalance()['free'][p.pair[-3:]]
         self.buyMessage(p.current_price)
 
-    # TODO: Update this with the Poloniex API
     def sellCoin(self, p):
         self.phase = 'sell'
         self.prev_eth = self.n_eth

@@ -29,8 +29,8 @@ curr_value = curr_usd + curr_eth*curr_price
 
 print('')
 print("CHECKING IN!  Currently, your wallet holds:")
-print(greentext("%5.2f USD") % curr_usd)
-print(yellowtext("%1.6f ETH") % curr_eth)
+print(greentext("%5.2f USD").ljust(12, ' ') % curr_usd)
+print(yellowtext("%1.6f ETH").ljust(12, ' ') % curr_eth)
 print('')
 print("TOTAL WALLET VALUE:")
 print(greenbg("%5.2f USD") % curr_value)
