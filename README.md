@@ -30,6 +30,9 @@ mypassword = "YOUR_GMAIL_PASSWORD"
 * `use_email`: Whether or not to use emailer.  Right now, I don't think the email utility I'm using works on AWS.
 * `phase`:  The initial phase to start in.
 
+# Bonus
+I also have the Python/shell script named `query` to quickly query your balance in between log outputs.  This script requires one non-case-sensitive argument: the currency abbreviation.  Example: Simply type `./query eth`.
+
 # TODOs
 
 * Read a finance book and maybe learn how to trade more.
