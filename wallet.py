@@ -1,15 +1,15 @@
 class Wallet:
-    def __init__(self, start_usd, start_coin, thresh, self.phase):
-        self.start_usd = start_usd
-        self.start_coin = start_coin
-        self.n_usd = self.prev_usd = start_usd
-        self.n_coin = self.prev_coin = start_coin
-        self.thresh = thresh
+    def __init__(self, start_usd, start_coin, self.phase):
+        self.start_usd = self.n_usd = start_usd
+        self.start_coin = self.n_coin = start_coin
         self.phase = self.phase
+        self.prev_buy = 0
+        self.prev_sell = 1e10
 
     def buyCoin(self, p):
         self.phase = 'buy'
         self.prev_usd = self.n_usd
+        self.prev_buy = p.current_price
 
         buy_amt = (self.n_usd / p.current_price) * 0.95
         p.conn.createMarketBuyOrder(p.pair, buy_amt)
@@ -22,6 +22,7 @@ class Wallet:
     def sellCoin(self, p):
         self.phase = 'sell'
         self.prev_coin = self.n_coin
+        self.prev_sell = p.current_price
 
         sell_amt = self.n_coin * 0.95
         p.conn.createMarketSellOrder(p.pair, sell_amt)

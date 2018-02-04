@@ -1,14 +1,24 @@
 def shouldBuy(w, p, e):
-    cond1 = p.ma_short > p.ma_long + e
-    cond2 = w.phase != 'buy'
-    cond3 = w.n_usd / p.current_price > w.prev_coin * w.thresh
-    return cond1 & cond2 #& cond3
+    cond1 = w.phase != 'buy'
+
+    # Are we trending upward?
+    cond2 = p.ma_short > p.ma_long * (1 + e)
+
+    # Are we buying low/selling high?
+    cond3 = p.current_price < p.prev_sell
+
+    return cond1 & cond2 & cond3
 
 def shouldSell(w, p, e):
-    cond1 = p.ma_short < p.ma_long - e
-    cond2 = w.phase != 'sell'
-    cond3 = (w.n_coin * p.current_price + w.n_usd) > (w.prev_usd + w.prev_coin * p.prev_price) * w.thresh
-    return cond1 & cond2 #& cond3
+    cond1 = w.phase != 'sell'
+
+    # Are trending downward?
+    cond1 = p.ma_short < p.ma_long * (1 - e)
+
+    # Are we buying low/selling high?
+    cond3 = p.current_price > p.prev_buy
+
+    return cond1 & cond2 & cond3
 
 def checkin(w, p):
 

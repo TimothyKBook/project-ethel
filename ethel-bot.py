@@ -1,5 +1,4 @@
 import sys
-import numpy as np
 import ccxt
 import time, datetime
 
@@ -15,8 +14,7 @@ pair      = "ETH/USD"
 SLEEP_SEC = 30
 short_len = 5
 long_len  = 30
-thresh    = 1.0025
-eps       = 4
+eps       = 0.005
 use_email = False
 phase     = 'buy'
 
@@ -28,7 +26,7 @@ conn = ccxt.kraken({
 start_usd = conn.fetchBalance()['free'][pair[-3:]]
 start_coin = conn.fetchBalance()['free'][pair[:3]]
 
-w = Wallet(start_usd, start_coin, thresh, phase)
+w = Wallet(start_usd, start_coin, phase)
 prices = Prices(conn, pair, short_len, long_len)
 if use_email: em = Emailer(secrets.myaddress, secrets.mypassword)
 
