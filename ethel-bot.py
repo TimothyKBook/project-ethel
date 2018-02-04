@@ -7,7 +7,7 @@ from prices import Prices
 from emailer import Emailer
 from utilities import shouldBuy, shouldSell, checkin
 
-# .gitignored file that contains the two strings used in line 26
+# .gitignored file that contains API keys, email address and password
 import secrets
 
 pair      = "ETH/USD"

@@ -11,7 +11,7 @@ class Wallet:
         self.prev_usd = self.n_usd
         self.prev_buy = p.current_price
 
-        buy_amt = (self.n_usd / p.current_price) * 0.95
+        buy_amt = (self.n_usd / p.current_price) * 0.98
         p.conn.createMarketBuyOrder(p.pair, buy_amt)
 
         bal = p.conn.fetchBalance()['free']
@@ -24,7 +24,7 @@ class Wallet:
         self.prev_coin = self.n_coin
         self.prev_sell = p.current_price
 
-        sell_amt = self.n_coin * 0.95
+        sell_amt = self.n_coin * 0.98
         p.conn.createMarketSellOrder(p.pair, sell_amt)
 
         bal = p.conn.fetchBalance()['free']
