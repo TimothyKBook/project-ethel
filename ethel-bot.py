@@ -11,13 +11,14 @@ from utilities import shouldBuy, shouldSell, checkin
 # .gitignored file that contains the two strings used in line 26
 import secrets
 
-pair = "ETH/USD"
+pair      = "ETH/USD"
 SLEEP_SEC = 30
 short_len = 5
 long_len  = 30
 thresh    = 1.0025
 eps       = 4
 use_email = False
+phase     = 'buy'
 
 conn = ccxt.kraken({
         "apiKey" : secrets.publickey,
@@ -25,9 +26,9 @@ conn = ccxt.kraken({
 })
 
 start_usd = conn.fetchBalance()['free'][pair[-3:]]
-start_eth = conn.fetchBalance()['free'][pair[:3]]
+start_coin = conn.fetchBalance()['free'][pair[:3]]
 
-w = Wallet(start_usd, start_eth, thresh)
+w = Wallet(start_usd, start_coin, thresh, phase)
 prices = Prices(conn, pair, short_len, long_len)
 if use_email: em = Emailer(secrets.myaddress, secrets.mypassword)
 
