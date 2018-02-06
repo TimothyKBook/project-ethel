@@ -10,8 +10,8 @@ from utilities import shouldBuy, shouldSell, checkin
 # .gitignored file that contains API keys, email address and password
 import secrets
 
-pair      = "ETH/USD"
-SLEEP_SEC = 30
+pair      = "LTC/USD"
+SLEEP_SEC = 15
 short_len = 5
 long_len  = 30
 eps       = 0.005
