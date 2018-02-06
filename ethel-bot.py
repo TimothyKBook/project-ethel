@@ -10,13 +10,17 @@ from utilities import shouldBuy, shouldSell, checkin
 # .gitignored file that contains API keys, email address and password
 import secrets
 
-pair      = "LTC/USD"
 SLEEP_SEC = 15
 short_len = 5
 long_len  = 30
 eps       = 0.005
 use_email = False
 phase     = 'buy'
+
+if len(sys.argv) > 1:
+    pair = sys.argv[1].upper() + "/USD"
+else:
+    pair = "ETH/USD"
 
 conn = ccxt.kraken({
         "apiKey" : secrets.publickey,

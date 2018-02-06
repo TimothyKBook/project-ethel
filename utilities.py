@@ -38,7 +38,7 @@ def checkin(w, p):
     coin_name = p.pair[:3]
 
     print("CHECKIN %i.  WALLET CONTAINS:" % len(p.prices))
-    print(enyellow("%1.6f %s" % w.n_coin, coin_name) + " and " + engreen("%5.2f USD" % w.n_usd))
+    print(enyellow("%1.6f %s" % (w.n_coin, coin_name)) + " and " + engreen("%5.2f USD" % w.n_usd))
     print("CURRENT PRICE:".ljust(22, ' ') + ("%5.2f USD" % p.current_price))
     print(("CURRENT MA(%i):" % p.short_len).ljust(22, ' ') + ("%5.2f USD" % p.ma_short))
     print(("CURRENT MA(%i):" % p.long_len).ljust(22, ' ') + ("%5.2f USD" % p.ma_long))
