@@ -2,7 +2,7 @@ class Wallet:
     def __init__(self, start_usd, start_coin, phase):
         self.start_usd = self.n_usd = start_usd
         self.start_coin = self.n_coin = start_coin
-        self.phase = self.phase
+        self.phase = phase
         self.prev_buy = 0
         self.prev_sell = 1e10
 
