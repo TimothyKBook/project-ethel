@@ -5,7 +5,7 @@ def shouldBuy(w, p, e):
     cond2 = p.ma_short > p.ma_long * (1 + e)
 
     # Are we buying low/selling high?
-    cond3 = p.current_price < p.prev_sell * (1 - e)
+    cond3 = p.current_price < w.prev_sell * (1 - e)
 
     return cond1 & cond2 & cond3
 
@@ -13,10 +13,10 @@ def shouldSell(w, p, e):
     cond1 = w.phase != 'sell'
 
     # Are trending downward?
-    cond1 = p.ma_short < p.ma_long * (1 - e)
+    cond2 = p.ma_short < p.ma_long * (1 - e)
 
     # Are we buying low/selling high?
-    cond3 = p.current_price > p.prev_buy * (1 + e)
+    cond3 = p.current_price > w.prev_buy * (1 + e)
 
     return cond1 & cond2 & cond3
 
