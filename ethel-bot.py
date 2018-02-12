@@ -15,7 +15,7 @@ short_len = 5
 long_len  = 30
 eps       = 0.005
 use_email = False
-phase     = 'buy'
+phase     = 'sell'
 
 if len(sys.argv) > 1:
     pair = sys.argv[1].upper() + "/USD"

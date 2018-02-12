@@ -1,3 +1,5 @@
+import datetime
+
 def shouldBuy(w, p, e):
     cond1 = w.phase != 'buy'
 
@@ -37,7 +39,9 @@ def checkin(w, p):
 
     coin_name = p.pair[:3]
 
-    print("CHECKIN %i.  WALLET CONTAINS:" % len(p.prices))
+    time_print = datetime.datetime.now().strftime("It is $b %d at %H:%m%p")
+    print(time_print)
+    print("WALLET CONTAINS:")
     print(enyellow("%1.6f %s" % (w.n_coin, coin_name)) + " and " + engreen("%5.2f USD" % w.n_usd))
     print("CURRENT PRICE:".ljust(22, ' ') + ("%5.2f USD" % p.current_price))
     print(("CURRENT MA(%i):" % p.short_len).ljust(22, ' ') + ("%5.2f USD" % p.ma_short))
