@@ -14,9 +14,12 @@ class Prices:
         self.initial_price = float(self.conn.fetchTicker(self.pair)['last'])
 
     def addCurrentPrice(self):
-        self.prev_price = self.current_price
-        self.current_price = float(self.conn.fetchTicker(self.pair)['last'])
-        self.prices.append(self.current_price)
+        try:
+            self.prev_price = self.current_price
+            self.current_price = float(self.conn.fetchTicker(self.pair)['last'])
+            self.prices.append(self.current_price)
+        except:
+            print("Error getting new price.")
 
     def updateMA(self):
         self.ma_short = np.mean(self.prices[-self.short_len:])
