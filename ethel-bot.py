@@ -13,9 +13,9 @@ import secrets
 SLEEP_SEC = 15
 short_len = 5
 long_len  = 30
-eps       = 0.005
+eps       = 0.0035
 use_email = False
-phase     = 'sell'
+phase     = 'buy'
 
 if len(sys.argv) > 1:
     pair = sys.argv[1].upper() + "/USD"

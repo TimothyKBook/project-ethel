@@ -4,7 +4,7 @@ class Wallet:
         self.start_coin = self.n_coin = start_coin
         self.phase = phase
         self.prev_buy = 0
-        self.prev_sell = 1e10
+        self.prev_sell = 10000000000000
 
     def buyCoin(self, p):
         self.phase = 'buy'

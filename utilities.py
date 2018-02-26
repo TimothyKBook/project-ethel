@@ -39,7 +39,7 @@ def checkin(w, p):
 
     coin_name = p.pair[:3]
 
-    time_print = datetime.datetime.now().strftime("It is $b %d at %H:%m%p")
+    time_print = datetime.datetime.now().strftime("It is %b %d at %H:%M%p")
     print(time_print)
     print("WALLET CONTAINS:")
     print(enyellow("%1.6f %s" % (w.n_coin, coin_name)) + " and " + engreen("%5.2f USD" % w.n_usd))

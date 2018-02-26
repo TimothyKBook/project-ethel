@@ -1,4 +1,4 @@
-#!python
+#!/usr/bin/python3
 
 import ccxt
 import secrets
@@ -8,6 +8,9 @@ conn = ccxt.kraken({
         "apiKey" : secrets.publickey,
         "secret" : secrets.privatekey
 })
+
+coin_name = sys.argv[1].upper()
+pair = coin_name + "/USD"
 
 def greentext(s):
     coloring = '\x1b[1;32;40m'
@@ -24,25 +27,19 @@ def greenbg(s):
     ending = '\x1b[0m'
     return coloring + s + ending
 
-bals = conn.fetchBalance()['free']
-coins = list(bals.keys())
-tick = conn.fetchTickers()
+curr_balance = conn.fetchBalance()['free']
+curr_usd = curr_balance['USD']
+curr_coin = curr_balance[coin_name]
+curr_price = conn.fetchTicker(pair)['last']
+curr_value = curr_usd + curr_coin*curr_price
 
 print('')
 print("CHECKING IN!  Currently, your wallet holds:")
-
-total_value = 0
-for c in coins:
-    if c == 'USD':
-        print(greentext("   %5.2f USD") % bals['USD'])
-        total_value += bals['USD']
-    else:
-        bal = bals[c]
-        pr = tick[c + '/USD']['last']
-        value = bal * pr
-        total_value += value
-        print(yellowtext("%1.6f %s (worth %2.2f USD)") % (bal, c, value))
-
+print(greentext("%5.2f USD").ljust(12, ' ') % curr_usd)
+print(yellowtext("%1.6f %s").ljust(12, ' ') % (curr_coin, coin_name))
 print('')
 print("TOTAL WALLET VALUE:")
-print(greenbg("%5.2f USD") % total_value)
+print(greenbg("%5.2f USD") % curr_value)
+print('')
+print("CURRENT PRICE:")
+print("%5.2f USD" % curr_price)
