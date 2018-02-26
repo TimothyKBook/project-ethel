@@ -17,10 +17,7 @@ eps       = 0.0035
 use_email = False
 phase     = 'buy'
 
-if len(sys.argv) > 1:
-    pair = sys.argv[1].upper() + "/USD"
-else:
-    pair = "ETH/USD"
+pair = "ETH/USD" if len(sys.argv) == 1 else sys.argv[1].upper() + "/USD"
 
 conn = ccxt.kraken({
         "apiKey" : secrets.publickey,
