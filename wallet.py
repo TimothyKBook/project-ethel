@@ -7,12 +7,13 @@ class Wallet:
         self.prev_sell = 10000000000000
 
     def buyCoin(self, p):
-        self.phase = 'buy'
-        self.prev_usd = self.n_usd
-        self.prev_buy = p.current_price
-
-        buy_amt = (self.n_usd / p.current_price) * 0.98
-        p.conn.createMarketBuyOrder(p.pair, buy_amt)
+        try:
+            buy_amt = (self.n_usd / p.current_price) * 0.98
+            p.conn.createMarketBuyOrder(p.pair, buy_amt)
+            self.prev_buy = p.current_price
+            self.phase = 'buy'
+        except:
+            print('Error buying coin.')
 
         bal = p.conn.fetchBalance()['free']
         self.n_coin = bal[p.pair[:3]]
@@ -20,12 +21,13 @@ class Wallet:
         self.buyMessage(p)
 
     def sellCoin(self, p):
-        self.phase = 'sell'
-        self.prev_coin = self.n_coin
-        self.prev_sell = p.current_price
-
-        sell_amt = self.n_coin * 0.98
-        p.conn.createMarketSellOrder(p.pair, sell_amt)
+        try:
+            sell_amt = self.n_coin * 0.98
+            p.conn.createMarketSellOrder(p.pair, sell_amt)
+            self.prev_coin = self.n_coin
+            self.phase = 'sell'
+        except:
+            print("Error selling coin.")
 
         bal = p.conn.fetchBalance()['free']
         self.n_coin = bal[p.pair[:3]]
